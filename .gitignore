@@ -10,7 +10,7 @@
 
 ###> custom ignore files ###
 .idea/workspace.xml
-
+###< custom ignore files ###
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
