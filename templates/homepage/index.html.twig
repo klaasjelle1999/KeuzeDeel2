@@ -1,20 +1,138 @@
-{% extends 'base.html.twig' %}
+<html lang="en">
+<head>
+    <title>Projecten keuzedelen</title>
+    <!--css bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Javascript bootstrap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!--custom css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom.css') }}">
+    <!--responsive mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+    <!--navbar brand-->
+    <a class="navbar-brand" href="#"><img src="{{ asset('assets/img/logo-roc-friesepoort.png') }}" class="logo"></a>
 
-{% block title %}Hello HomepageController!{% endblock %}
+    <!-- Collapse hamburger button -->
+    <!--<button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"-->
+    <!--aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i-->
+    <!--class="fas fa-bars fa-1x"></i></span></button>-->
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!--&lt;!&ndash;collapse content&ndash;&gt;-->
+    <!--<div class="collapse navbar-collapse" id="navbarSupportedContent1">-->
+    <!--<ul class="navbar-nav ml-auto">-->
+    <!--<li class="nav-item">-->
+    <!--<button type="button" class="round btn btn btn-light font-weight-bold">Student login</button>-->
+    <!--<button type="button" class="round btn btn-light font-weight-bold">Informatie voor decanen</button>-->
+    <!--<button type="button" class="round btn btn-light font-weight-bold">Werken bij</button>-->
+    <!--<button type="button" class="round btn btn-light font-weight-bold">Over ons</button>-->
+    <!--<button type="button" class="btn btn-danger btn-circle btn-lg"><i class="fas fa-search"></i></button>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/klaas-jelleras/Projects/KeuzeDeel2/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/klaas-jelleras/Projects/KeuzeDeel2/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
-    </ul>
+</nav>
+<div class="w-100">
+    <img class="header-image" src="{{ asset('assets/img/header-image.jpg') }}">
 </div>
-{% endblock %}
+<div class="h-50 input-group mb-3"></div>
+{#    <div class="searchbar text-center container w-75 ">#}
+{#        <input class="search_input w-100" type="text" name="" placeholder="Zoek een keuzedeel">#}
+{#    </div>#}
+
+<div class="container keuzedelen mt-4">
+    <h1 class="font-weight-bold">Keuzedelen</h1>
+</div>
+<div class="container filter">
+    <div class="row font-weight-bold">
+
+            {{ form_start(form) }}
+            <div class="form-inline">
+                <div class="col">
+                    <label class="form-label">Categorie</label>
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="col">
+                    <label class="form-label">Dagdeel</label>
+                    {{ form_row(form.partOfDay) }}
+                </div>
+                <div class="col">
+                    <label class="form-label">Niveau</label>
+                    {{ form_row(form.tier) }}
+                </div>
+                <div class="col">
+                    <label class="form-label">Zoeken</label>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+            </div>
+            {{ form_end(form) }}
+
+        <!--<div class="col">-->
+        <!--<div class="form-group">-->
+        <!--<label for="exampleSelect1">duur periode</label>-->
+        <!--<select class="form-control" id="exampleSelect1">-->
+        <!--<option>1 periode</option>-->
+        <!--<option>2 periodes</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--<option>5</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+<div class="container cards">
+    <div class="row">
+        {% for choiceOfSection in choiceOfSections %}
+            <div class="col-sm-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ choiceOfSection.name }}</h5>
+                        <p class="card-text">
+                            {% if choiceOfSection.description is not null %}
+                                {{ choiceOfSection.description|truncate(100) }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-info">Opleiding: {{ choiceOfSection.category.name }}</li>
+                        <li class="list-group-item">Wanneer: {{ choiceOfSection.partOfDay.partOfDay }}</li>
+                        <li class="list-group-item">Vanaf niveau: {{ choiceOfSection.tier.niveau }}</li>
+                    </ul>
+                    <div class="card-footer">
+                        <a href="{{ path('choice_of_section', {'choiceOfSection': choiceOfSection.id}) }}" class="card-link">Lees Meer...</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="modal" id="viewChoiceOfSectionModal"></div>
+<script>
+    const viewModal = '{{ path('show_choiceofsection', {choiceOfSection: '__REPLACE__'}) }}';
+
+    function choiceOfSectionModal(id) {
+        $.get(viewModal.replace('__REPLACE__', id)).then(function (html) {
+            $('#viewChoiceOfSectionModal').html(html);
+            $('#viewChoiceOfSectionModal').modal('show');
+        })
+    }
+</script>
+</body>
+</html>

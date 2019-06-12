@@ -1,0 +1,68 @@
+/*.btn-circle.btn-xl {*/
+    /*width: 70px;*/
+    /*height: 70px;*/
+    /*padding: 10px 16px;*/
+    /*border-radius: 35px;*/
+    /*font-size: 24px;*/
+    /*line-height: 1.33;*/
+/*}*/
+/*.btn-circle {*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*padding: 6px 0px;*/
+    /*border-radius: 15px;*/
+    /*text-align: center;*/
+    /*font-size: 12px;*/
+    /*line-height: 1.42857;*/
+/*}*/
+
+.logo {
+    width: 200px;
+    position: relative;
+}
+.navbar {
+    max-height: 70px;
+}
+.round{
+    border-radius: 50px;
+}
+.searchbar {
+    background-color: rgba(117,82,157,.6);
+    border-radius: 50px;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 1160px;
+    position: relative;
+    z-index: 4;
+}
+.search_input {
+    border-radius: 50px;
+    padding: 15px;
+    outline: none !important;
+}
+.header-image {
+    height: 60%;
+    width: 100%;
+    object-fit: cover;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    position: absolute;
+}
+.zoekbutton{
+    position: absolute;
+}
+.keuzedelen {
+    padding-top: 10px;
+}
+.card {
+    width: 22rem;
+    border: 1px solid gray;
+}
+.card-body {
+    height: 10rem;
+}
+
+.modal-content {
+    padding: 10px;
+}
