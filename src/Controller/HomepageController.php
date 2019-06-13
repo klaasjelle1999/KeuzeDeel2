@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class HomepageController extends AbstractController
 {
@@ -28,11 +29,47 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            if ($data->partOfDay->getId() !== 1 || $data->category->getId() !== 1 || $data->tier->getId() !== 1) {
+            if ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSections($data->category, $data->partOfDay, $data->tier)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->tier->getId() !== 1 && $data->partOfDay->getId() === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV2($data->category, $data->tier)
+                ;
+            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->category->getId() === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV3($data->partOfDay, $data->tier)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV4($data->category, $data->partOfDay)
+                ;
+            } elseif ($data->tier->getId() !== 1 && $data->category->getId() === 1 && $data->partOfDay === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV5($data->tier)
+                ;
+            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->category->getId() === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV6($data->partOfDay)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() === 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV7($data->category)
                 ;
             }
 

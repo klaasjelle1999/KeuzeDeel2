@@ -37,10 +37,76 @@ class ChoiceOfSectionRepository extends ServiceEntityRepository
             ->leftJoin('c.partOfDay', 'partOfDay')
             ->leftJoin('c.tier', 'tier')
             ->where('category.id =' . $category->getId())
-            ->orWhere('partOfDay.id =' . $partOfDay->getId())
-            ->orWhere('tier.id =' . $tier->getId())
+            ->andWhere('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('tier.id =' . $tier->getId())
             ->getQuery()
             ->getResult();
+    }
+
+    public function filterChoiceOfSectionsV2(Category $category = null, Tier $tier = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->leftJoin('c.tier', 'tier')
+            ->where('category.id =' . $category->getId())
+            ->andWhere('tier.id =' . $tier->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV3(PartOfDay $partOfDay = null, Tier $tier = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->leftJoin('c.tier', 'tier')
+            ->where('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('tier.id =' . $tier->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV4(Category $category = null, PartOfDay $partOfDay = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->where('category.id =' . $category->getId())
+            ->andWhere('partOfDay.id =' . $partOfDay->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV5(Tier $tier = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.tier', 'tier')
+            ->where('tier.id =' . $tier->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV6(PartOfDay $partOfDay = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->where('partOfDay.id =' . $partOfDay->getId())
+            ->getQuery()
+            ->getResult()
+        ;    
+    }
+
+    public function filterChoiceOfSectionsV7(Category $category = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->where('category.id =' . $category->getId())
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**
