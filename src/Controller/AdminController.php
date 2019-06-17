@@ -48,7 +48,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route(path="/admin/keuzedeel", name="choice_of_section")
+     * @Route(path="/admin/keuzedeel", name="admin_choice_of_section")
      * @param Request $request
      * @param ChoiceOfSectionManager $choiceOfSectionManager
      * @return RedirectResponse|Response
