@@ -64,7 +64,7 @@ class AdminController extends AbstractController
 
             $choiceOfSectionManager->createChoiceOfSection($data);
 
-            return $this->redirectToRoute('choice_of_section');
+            return $this->redirectToRoute('admin_choice_of_section');
         }
 
         return $this->render('admin/choiceofsection.html.twig', [
@@ -117,7 +117,7 @@ class AdminController extends AbstractController
 
         $choiceOfSectionManager->deleteChoiceOfSection($choiceOfSection);
 
-        return $this->redirectToRoute('choice_of_section');
+        return $this->redirectToRoute('admin_choice_of_section');
     }
 
     /**
@@ -134,7 +134,7 @@ class AdminController extends AbstractController
 
         $choiceOfSectionManager->activateChoiceOfSection($choiceOfSection);
 
-        return $this->redirectToRoute('choice_of_section');
+        return $this->redirectToRoute('admin_choice_of_section');
     }
 
     /**
