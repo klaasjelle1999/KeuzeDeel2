@@ -72,6 +72,14 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @return null|string
+     */
+    public function getRole()
+    {
+        return count($this->roles) ? $this->roles[0] : null;
+    }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;

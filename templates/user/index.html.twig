@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin.css') }}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.1.0/classic/ckeditor.js"></script>
 
 </head>
 
@@ -61,17 +62,17 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item">
             <a class="nav-link" href="{{ path('admin_choice_of_section') }}">
                 <i class="fas fa-fw fa-list-ol"></i>
                 <span>Keuzedelen</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="{{ path('category') }}">
                 <i class="fas fa-fw fa-bars"></i>
                 <span>Categorieën</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="{{ path('user') }}">
                 <i class="fas fa-fw fa-bars"></i>
                 <span>Gebruikers</span></a>
@@ -87,14 +88,16 @@
                 <li class="breadcrumb-item">
                     <a href="{{ path('admin') }}">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Categorieën</li>
+                <li class="breadcrumb-item active">Gebruikers</li>
             </ol>
-
-            <div class="row container-fluid">
-                <div class="card mb-3 col-lg-6">
+            <div class="text-right">
+                <a href="{{ path('create_user') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Gebruiker aanmaken</a>
+            </div>
+            <br>
+            <div class="container-fluid">
+                <div class="card mb-3 col-12">
                     <div class="card-header">
-                        <i class="fas fa-table"></i>
-                        Categorieën
+                        Gebruikers
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -102,22 +105,31 @@
                                 <thead>
                                 <tr>
                                     <th>Naam</th>
+                                    <th>Rol</th>
                                     <th>Acties</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Naam</th>
+                                    <th>Rol</th>
                                     <th>Acties</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                {% for category in categories %}
+                                {% for user in users %}
                                     <tr>
-                                        <td>{{ category.name }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            {% if user.role == 'ROLE_ADMIN' %}
+                                                Admin
+                                            {% elseif user.role == 'ROLE_USER' %}
+                                                Gebruiker
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ path('delete_category', {'category': category.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
                                                 <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                             </div>
                                         </td>
@@ -128,67 +140,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-3 col-lg-6">
-                    <div class="card-header">
-                        <i class="fas fa-table"></i>
-                        Categorie toevoegen
-                    </div>
-                    <div class="card-body">
-                        {{ form_start(form) }}
-                        <div class="form-group">
-                            <label class="form-label">Naam:</label>
-                            {{ form_row(form.name) }}
-                        </div>
-                        <div class="form-group">
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-primary">Verzenden</button>
-                            </div>
-                        </div>
-                        {{ form_end(form) }}
-                    </div>
-                </div>
             </div>
         </div>
         <!-- /.container-fluid -->
-        <div class="row container-fluid">
-            <div class="card mb-3 col-lg-12">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    Verwijderde categorieën
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Naam</th>
-                                <th>Acties</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Naam</th>
-                                <th>Acties</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            {% for category in deletedCategories %}
-                                <tr>
-                                    <td>{{ category.name }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ path('activate_category', {'category': category.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                            <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">
@@ -228,7 +183,6 @@
         </div>
     </div>
 </div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
