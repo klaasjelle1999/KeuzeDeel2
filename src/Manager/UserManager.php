@@ -40,4 +40,23 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
     }
+
+    public function removeUser(User $user)
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+
+    public function editUser(User $user, $data)
+    {
+        $password = $this->passwordEncoder->encodePassword($user, $data['password']);
+
+        $user
+            ->setEmail($data['email'])
+            ->setPassword($password)
+        ;
+
+        $this->em->merge($user);
+        $this->em->flush();
+    }
 }
