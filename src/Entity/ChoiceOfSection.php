@@ -48,6 +48,11 @@ class ChoiceOfSection
      */
     private $tier;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ExtraInformation", cascade={"persist", "remove"})
+     */
+    private $extraInformation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,6 +130,18 @@ class ChoiceOfSection
     public function setTier(?Tier $tier): self
     {
         $this->tier = $tier;
+
+        return $this;
+    }
+
+    public function getExtraInformation(): ?ExtraInformation
+    {
+        return $this->extraInformation;
+    }
+
+    public function setExtraInformation(?ExtraInformation $extraInformation): self
+    {
+        $this->extraInformation = $extraInformation;
 
         return $this;
     }
