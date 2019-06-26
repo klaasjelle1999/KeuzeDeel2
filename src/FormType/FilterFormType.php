@@ -6,6 +6,7 @@ namespace App\FormType;
 
 use App\Entity\Category;
 use App\Entity\PartOfDay;
+use App\Entity\Period;
 use App\Entity\Tier;
 use App\FormData\FilterFormData;
 use Doctrine\ORM\EntityRepository;
@@ -62,7 +63,18 @@ class FilterFormType extends AbstractType
                 'choice_value' => function (Tier $tier = null) {
                     return $tier ? $tier->getId() : '';
                 }
-    ])
+            ])
+            ->add('period', EntityType::class, [
+                'class' => Period::class,
+                'choice_label' => 'period',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+                'choice_value' => function (Period $period = null) {
+                    return $period ? $period->getId() : '';
+                }
+            ])
         ;
     }
 

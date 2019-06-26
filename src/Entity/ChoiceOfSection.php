@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,16 @@ class ChoiceOfSection
      * @ORM\OneToOne(targetEntity="App\Entity\ExtraInformation", cascade={"persist", "remove"})
      */
     private $extraInformation;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Period", inversedBy="choiceOfSections")
+     */
+    private $period;
+
+    public function __construct()
+    {
+        $this->period = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -142,6 +154,32 @@ class ChoiceOfSection
     public function setExtraInformation(?ExtraInformation $extraInformation): self
     {
         $this->extraInformation = $extraInformation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Period[]
+     */
+    public function getPeriod(): Collection
+    {
+        return $this->period;
+    }
+
+    public function addPeriod(Period $period): self
+    {
+        if (!$this->period->contains($period)) {
+            $this->period[] = $period;
+        }
+
+        return $this;
+    }
+
+    public function removePeriod(Period $period): self
+    {
+        if ($this->period->contains($period)) {
+            $this->period->removeElement($period);
+        }
 
         return $this;
     }

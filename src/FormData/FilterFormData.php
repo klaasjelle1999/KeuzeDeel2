@@ -6,6 +6,7 @@ namespace App\FormData;
 
 use App\Entity\Category;
 use App\Entity\PartOfDay;
+use App\Entity\Period;
 use App\Entity\Tier;
 
 class FilterFormData
@@ -24,4 +25,9 @@ class FilterFormData
      * @var Tier
      */
     public $tier;
+
+    /**
+     * @var Period
+     */
+    public $period;
 }

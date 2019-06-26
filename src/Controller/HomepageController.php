@@ -29,47 +29,95 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            if ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1) {
+            if ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSections($data->category, $data->partOfDay, $data->tier)
                 ;
-            } elseif ($data->category->getId() !== 1 && $data->tier->getId() !== 1 && $data->partOfDay->getId() === 1) {
+            } elseif ($data->category->getId() !== 1 && $data->tier->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV2($data->category, $data->tier)
                 ;
-            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->category->getId() === 1) {
+            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->category->getId() === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV3($data->partOfDay, $data->tier)
                 ;
-            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() === 1) {
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV4($data->category, $data->partOfDay)
                 ;
-            } elseif ($data->tier->getId() !== 1 && $data->category->getId() === 1 && $data->partOfDay === 1) {
+            } elseif ($data->tier->getId() !== 1 && $data->category->getId() === 1 && $data->partOfDay === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV5($data->tier)
                 ;
-            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->category->getId() === 1) {
+            } elseif ($data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->category->getId() === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV6($data->partOfDay)
                 ;
-            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() === 1) {
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() === 1 && $data->period->getId() === 1) {
                 $choiceOfSections = $this
                     ->getDoctrine()
                     ->getRepository(ChoiceOfSection::class)
                     ->filterChoiceOfSectionsV7($data->category)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() !== 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV9($data->category, $data->period)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV8($data->category, $data->partOfDay, $data->tier, $data->period)
+                ;
+            } elseif ($data->category->getId() === 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV10($data->partOfDay, $data->period)
+                ;
+            } elseif ($data->category->getId() === 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() !== 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV11($data->tier, $data->period)
+                ;
+            } elseif ($data->category->getId() === 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() === 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV12($data->period)
+                ;
+            } elseif ($data->category->getId() === 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() !== 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV13($data->partOfDay, $data->tier, $data->period)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() !== 1 && $data->tier->getId() === 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV14($data->category, $data->partOfDay, $data->period)
+                ;
+            } elseif ($data->category->getId() !== 1 && $data->partOfDay->getId() === 1 && $data->tier->getId() !== 1 && $data->period->getId() !== 1) {
+                $choiceOfSections = $this
+                    ->getDoctrine()
+                    ->getRepository(ChoiceOfSection::class)
+                    ->filterChoiceOfSectionsV15($data->category, $data->tier, $data->period)
                 ;
             }
 

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\ChoiceOfSection;
 use App\Entity\PartOfDay;
+use App\Entity\Period;
 use App\Entity\Tier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -108,6 +109,111 @@ class ChoiceOfSectionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function filterChoiceOfSectionsV8(Category $category = null, PartOfDay $partOfDay = null, Tier $tier = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->leftJoin('c.tier', 'tier')
+            ->leftJoin('c.period', 'period')
+            ->where('category.id =' . $category->getId())
+            ->andWhere('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('tier.id =' . $tier->getId())
+            ->andWhere('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function filterChoiceOfSectionsV9(Category $category = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.period', 'period')
+            ->leftJoin('c.category', 'category')
+            ->where('period.id =' . $period->getId())
+            ->andWhere('category.id =' . $category->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV10(PartOfDay $partOfDay = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->leftJoin('c.period', 'period')
+            ->where('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV11(Tier $tier = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.tier', 'tier')
+            ->leftJoin('c.period', 'period')
+            ->where('tier.id =' . $tier->getId())
+            ->andWhere('period.id = ' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV12(Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.period', 'period')
+            ->where('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV13(PartOfDay $partOfDay = null, Tier $tier = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->leftJoin('c.tier', 'tier')
+            ->leftJoin('c.period', 'period')
+            ->where('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('tier.id =' . $tier->getId())
+            ->andWhere('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV14(Category $category = null, PartOfDay $partOfDay = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->leftJoin('c.partOfDay', 'partOfDay')
+            ->leftJoin('c.period', 'period')
+            ->where('category.id =' . $category->getId())
+            ->andWhere('partOfDay.id =' . $partOfDay->getId())
+            ->andWhere('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filterChoiceOfSectionsV15(Category $category = null, Tier $tier = null, Period $period = null)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.category', 'category')
+            ->leftJoin('c.tier', 'tier')
+            ->leftJoin('c.period', 'period')
+            ->where('category.id =' . $category->getId())
+            ->andWhere('tier.id =' . $tier->getId())
+            ->andWhere('period.id =' . $period->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 
     // /**
     //  * @return ChoiceOfSection[] Returns an array of ChoiceOfSection objects
