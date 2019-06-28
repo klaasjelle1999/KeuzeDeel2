@@ -47,16 +47,35 @@
 <div class="w-100">
     <img class="header-image" src="{{ asset('assets/img/header-image.jpg') }}">
 </div>
-<div class="h-50 input-group mb-3"></div>
-{#    <div class="searchbar text-center container w-75 ">#}
-{#        <input class="search_input w-100" type="text" name="" placeholder="Zoek een keuzedeel">#}
-{#    </div>#}
-<div class="container keuzedelen mt-4">
+<div class="container keuzedelen">
     <br>
     <br>
     <h1 class="font-weight-bold">{{ choiceOfSection.name }}</h1>
     {{ choiceOfSection.description|markdown }}
-    <br>
+    {% if choiceOfSection.partOfDay != null %}
+        <br>
+        Wanneer: Elke {{ choiceOfSection.partOfDay.partOfDay }} in periodes {% for period in choiceOfSection.period %}{{ period.period }} {% endfor %}
+    {% endif %}
+    {% if choiceOfSection.tier != null %}
+        <br>
+        Niveau: {{ choiceOfSection.tier.niveau }}
+    {% endif %}
+    {% if choiceOfSection.extraInformation.contactHours != null %}
+        <br>
+        Contact uren: {{ choiceOfSection.extraInformation.contactHours }}
+    {% endif %}
+    {% if choiceOfSection.extraInformation.internshipHours != null %}
+        <br>
+        BPV uren: {{ choiceOfSection.extraInformation.internshipHours }}
+    {% endif %}
+    {% if choiceOfSection.extraInformation.examination != null %}
+        <br>
+        Examinering: {{ choiceOfSection.extraInformation.examination }}
+    {% endif %}
+    {% if choiceOfSection.extraInformation.cost != null %}
+        <br>
+        Kosten: €{{ choiceOfSection.extraInformation.cost }}
+    {% endif %}
     <div class="text-right">
         <a class="btn btn-primary" href="{{ path('homepage') }}">Ga Terug</a>
     </div>

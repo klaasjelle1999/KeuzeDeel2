@@ -2,25 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\ChoiceOfSection;
 use App\FormType\FilterFormType;
-use http\Env\Request;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Choice;
 
 class HomepageController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @return Response
      */
-    public function index(\Symfony\Component\HttpFoundation\Request $request)
+    public function index(Request $request)
     {
         $choiceOfSections = $this->getDoctrine()->getRepository(ChoiceOfSection::class)->findNonDeletedChoiceOfSections();
         $form = $this->createForm(FilterFormType::class);

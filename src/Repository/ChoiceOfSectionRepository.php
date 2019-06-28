@@ -213,8 +213,6 @@ class ChoiceOfSectionRepository extends ServiceEntityRepository
         ;
     }
 
-
-
     // /**
     //  * @return ChoiceOfSection[] Returns an array of ChoiceOfSection objects
     //  */

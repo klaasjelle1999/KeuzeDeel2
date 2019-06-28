@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\ChoiceOfSection;
+use App\Entity\Period;
 use App\Entity\Tier;
 use App\FormType\CategoryFormType;
 use App\FormType\ChoiceOfSectionFormType;
@@ -12,6 +13,7 @@ use App\FormType\UpdateChoiceOfSectionFormType;
 use App\Manager\CategoryManager;
 use App\Manager\ChoiceOfSectionManager;
 use App\Manager\TierManager;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,10 +59,13 @@ class AdminController extends AbstractController
     {
         $choiceOfSections = $this->getDoctrine()->getRepository(ChoiceOfSection::class)->findAll();
         $form = $this->createForm(ChoiceOfSectionFormType::class);
+        $periods = $this->getDoctrine()->getRepository(Period::class)->findAll();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            dd($data);
 
             $choiceOfSectionManager->createChoiceOfSection($data);
 
@@ -70,6 +75,7 @@ class AdminController extends AbstractController
         return $this->render('admin/choiceofsection.html.twig', [
             'form' => $form->createView(),
             'choiceOfSections' => $choiceOfSections,
+            'periods' => $periods,
         ]);
     }
 
@@ -86,12 +92,18 @@ class AdminController extends AbstractController
             throw new NotFoundHttpException('Dit keuzedeel is niet gevonden!');
         }
 
+        if (isset($_POST['submitperiod'])) {
+            $choiceOfSectionManager->addPeriodToChoiceOfSection($choiceOfSection, $_POST);
+        }
+
+        $periods = $this->getDoctrine()->getRepository(Period::class)->findAll();
+
         $form = $this->createForm(UpdateChoiceOfSectionFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $choiceOfSectionManager->updateChoiceOfSection($data, $choiceOfSection);
+            $choiceOfSectionManager->updateChoiceOfSection($data, $choiceOfSection, $choiceOfSection->getExtraInformation());
 
             return $this->redirectToRoute('update_choice_of_section', [
                 'choiceOfSection' => $choiceOfSection->getId(),
@@ -101,6 +113,7 @@ class AdminController extends AbstractController
         return $this->render('admin/updatechoiceofsection.html.twig', [
             'choiceOfSection' => $choiceOfSection,
             'form' => $form->createView(),
+            'periods' => $periods,
         ]);
     }
 

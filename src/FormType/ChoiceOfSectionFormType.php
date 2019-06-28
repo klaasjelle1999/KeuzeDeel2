@@ -5,12 +5,16 @@ namespace App\FormType;
 
 
 use App\Entity\Category;
+use App\Entity\ChoiceOfSection;
 use App\Entity\PartOfDay;
+use App\Entity\Period;
 use App\Entity\Tier;
 use App\FormData\ChoiceOfSectionFormData;
 use Doctrine\ORM\EntityRepository;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,6 +56,30 @@ class ChoiceOfSectionFormType extends AbstractType
                 ],
                 'class' => Tier::class,
                 'choice_label' => 'niveau',
+                'label' => false,
+            ])
+            ->add('contact_hours', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('internship_hours', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('examination', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('cost', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
                 'label' => false,
             ])
         ;

@@ -98,7 +98,11 @@
                             {{ form_row(form.name,  {'value': choiceOfSection.name}) }}
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Categorie: <small>(Let op: De categorie word niet automatisch ingevuld en zal dus opniew aan de desbetreffende categorie moeten worden gekoppeld!)</small></label>
+                            <label class="form-label">Categorie:
+                                <small>(Let op: De categorie word niet automatisch ingevuld en zal dus opniew aan de
+                                    desbetreffende categorie moeten worden gekoppeld!)
+                                </small>
+                            </label>
                             {{ form_row(form.category, {'selected': choiceOfSection.category}) }}
                         </div>
                         <div class="form-group">
@@ -108,6 +112,22 @@
                         <div class="form-group">
                             <label class="form-label">Niveau:</label>
                             {{ form_row(form.tier) }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contact uren:</label>
+                            {{ form_row(form.contact_hours, {'value': choiceOfSection.extraInformation.contactHours}) }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">BPV uren:</label>
+                            {{ form_row(form.internship_hours, {'value': choiceOfSection.extraInformation.internshipHours}) }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Examinering:</label>
+                            {{ form_row(form.examination, {'value': choiceOfSection.extraInformation.examination}) }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Kosten:</label>
+                            {{ form_row(form.cost, {'value': choiceOfSection.extraInformation.cost}) }}
                         </div>
                         <div class="form-group">
                             <label class="form-label">Beschrijving:</label>
@@ -130,12 +150,61 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Categorie:</label>
-                            <input type="text" class="form-control" value="{{ choiceOfSection.category.name }}" disabled>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.category.name }}"
+                                   disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dagdeel:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.partOfDay.partOfDay }}"
+                                   disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Niveau:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.tier.niveau }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contact uren:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.extraInformation.contactHours }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">BPV uren:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.extraInformation.internshipHours }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Examinering:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.extraInformation.examination }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Kosten:</label>
+                            <input type="text" class="form-control" value="{{ choiceOfSection.extraInformation.cost }}" disabled>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Beschrijving:</label>
-                            <textarea class="form-control" id="exampleDescription" name="exampleDescription" disabled>{{ choiceOfSection.description|markdown }}</textarea>
+                            <textarea class="form-control" id="exampleDescription" name="exampleDescription"
+                                      disabled>{{ choiceOfSection.description|markdown }}</textarea>
                         </div>
+                    </div>
+                </div>
+                <div class="card col-lg-6">
+                    <div class="card-header">
+                        <i class="fa fa-edit"></i> Periodes aan keuzedeel toevoegen
+                    </div>
+                    <div class="card-body">
+                        <form name="periodForm" method="post">
+                            <div class="form-group">
+                                <label class="form-label">Periodes:</label>
+                                <br>
+                                {% for period in periods %}
+                                    <input type="checkbox" name="{{ period.id }}" value="{{ period.id }}">
+                                    <label for="{{ period.id }}">{{ period.period }}</label>
+                                    <br>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group text-right">
+                                <button type="submit" name="submitperiod" class="btn btn-primary">Verzenden</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

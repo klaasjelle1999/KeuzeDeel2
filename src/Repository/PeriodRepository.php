@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\ChoiceOfSection;
 use App\Entity\Period;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -17,6 +18,16 @@ class PeriodRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Period::class);
+    }
+
+    public function findAllPeriodsForChoiceOfSection(ChoiceOfSection $choiceOfSection = null)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.choiceOfSections', 'choiceOfSections')
+            ->where('choiceOfSections.id =' . $choiceOfSection->getId())
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**

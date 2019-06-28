@@ -46,13 +46,8 @@
 </nav>
 <div class="w-100">
     <img class="header-image" src="{{ asset('assets/img/header-image.jpg') }}">
-</div>
-<div class="h-50 input-group mb-3"></div>
-{#    <div class="searchbar text-center container w-75 ">#}
-{#        <input class="search_input w-100" type="text" name="" placeholder="Zoek een keuzedeel">#}
-{#    </div>#}
 
-<div class="container keuzedelen mt-4">
+<div class="container keuzedelen">
     <h1 class="font-weight-bold">Keuzedelen</h1>
 </div>
 <div class="container filter">
@@ -117,6 +112,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item text-info">Opleiding: {{ choiceOfSection.category.name }}</li>
                         <li class="list-group-item">Wanneer: {{ choiceOfSection.partOfDay.partOfDay }}</li>
+                        <li class="list-group-item">Periode: {% for period in choiceOfSection.period %}{{ period.period }} {% endfor %}</li>
                         <li class="list-group-item">Vanaf niveau: {{ choiceOfSection.tier.niveau }}</li>
                     </ul>
                     <div class="card-footer">

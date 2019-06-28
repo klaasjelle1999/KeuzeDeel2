@@ -34,4 +34,24 @@ class UpdateChoiceOfSectionFormData
      * @var string
      */
     public $tier;
+
+    /**
+     * @var string
+     */
+    public $contact_hours;
+
+    /**
+     * @var string
+     */
+    public $internship_hours;
+
+    /**
+     * @var string
+     */
+    public $examination;
+
+    /**
+     * @var string
+     */
+    public $cost;
 }

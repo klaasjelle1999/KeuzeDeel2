@@ -59,6 +59,30 @@ class UpdateChoiceOfSectionFormType extends AbstractType
                 'choice_label' => 'niveau',
                 'label' => false,
             ])
+            ->add('contact_hours', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('internship_hours', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('examination', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
+            ->add('cost', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => false,
+            ])
         ;
     }
 
