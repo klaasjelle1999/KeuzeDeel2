@@ -103,7 +103,7 @@
                         <h5 class="card-title">{{ choiceOfSection.name }}</h5>
                         <p class="card-text">
                             {% if choiceOfSection.description is not null %}
-                                {{ choiceOfSection.description|truncate(100) }}
+                                {{ choiceOfSection.description|truncate(100)|striptags }}
                             {% else %}
                                 -
                             {% endif %}

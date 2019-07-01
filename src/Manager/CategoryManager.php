@@ -31,6 +31,14 @@ class CategoryManager
         $this->em->flush();
     }
 
+    public function editCategory(Category $category, $data)
+    {
+        $category->setName($data->name);
+
+        $this->em->merge($category);
+        $this->em->flush();
+    }
+
     public function deleteCategory(Category $category)
     {
         foreach ($category->getChoiceOfSections() as $choiceOfSection) {

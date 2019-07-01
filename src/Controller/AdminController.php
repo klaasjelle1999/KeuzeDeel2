@@ -8,6 +8,7 @@ use App\Entity\Period;
 use App\Entity\Tier;
 use App\FormType\CategoryFormType;
 use App\FormType\ChoiceOfSectionFormType;
+use App\FormType\EditCategoryFormType;
 use App\FormType\TierFormType;
 use App\FormType\UpdateChoiceOfSectionFormType;
 use App\Manager\CategoryManager;
@@ -190,6 +191,31 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
             'categories' => $categories,
             'deletedCategories' => $deletedCategories,
+        ]);
+    }
+
+    /**
+     * @Route(path="/admin/categorie/update/{category}", name="edit_category")
+     * @param Request $request
+     * @param Category $category
+     * @param CategoryManager $categoryManager
+     * @return Response
+     */
+    public function editCategory(Request $request, Category $category, CategoryManager $categoryManager)
+    {
+        $form = $this->createForm(EditCategoryFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $categoryManager->editCategory($category, $data);
+
+            return $this->redirectToRoute('category');
+        }
+
+        return $this->render('admin/editcategory.html.twig', [
+            'category' => $category,
+            'form' => $form->createView(),
         ]);
     }
 
