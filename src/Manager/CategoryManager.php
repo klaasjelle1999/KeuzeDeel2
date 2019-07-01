@@ -43,6 +43,21 @@ class CategoryManager
         $this->em->flush();
     }
 
+    public function hardDeleteCategory(Category $category)
+    {
+        $choiceOfSections = $category->getChoiceOfSections();
+        $notSelectedCategory = $this->em->getRepository(Category::class)->find(1);
+
+        foreach ($choiceOfSections as $choiceOfSection) {
+            $category->removeChoiceOfSection($choiceOfSection);
+            $choiceOfSection->setCategory($notSelectedCategory);
+            $this->em->merge($category);
+        }
+
+        $this->em->remove($category);
+        $this->em->flush();
+    }
+
     public function activateCategory(Category $category)
     {
         $category->setDeletedAt(null);

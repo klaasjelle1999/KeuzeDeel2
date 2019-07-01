@@ -10,6 +10,7 @@ use App\Entity\PartOfDay;
 use App\Entity\Period;
 use App\Entity\Tier;
 use App\FormData\ChoiceOfSectionFormData;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

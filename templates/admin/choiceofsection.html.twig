@@ -197,7 +197,7 @@
                                 <tr>
                                     <th>Naam</th>
                                     <th>Categorie</th>
-                                    <th>Acties</th>
+                                    <th>Acties (Definitief verwijderen)</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -217,6 +217,7 @@
                                                 <div class="btn-group" role="group">
                                                     <a href="{{ path('activate_choice_of_section', {'choiceOfSection': choiceOfSection.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                                     <a href="{{ path('update_choice_of_section', {'choiceOfSection': choiceOfSection.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{ path('hard-delete_choice_of_section', {'choiceOfSection': choiceOfSection.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

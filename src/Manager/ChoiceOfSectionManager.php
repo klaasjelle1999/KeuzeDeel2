@@ -73,6 +73,12 @@ class ChoiceOfSectionManager
         $this->em->flush();
     }
 
+    public function hardDeleteChoiceOfSection(ChoiceOfSection $choiceOfSection)
+    {
+        $this->em->remove($choiceOfSection);
+        $this->em->flush();
+    }
+
     public function deleteChoiceOfSection(ChoiceOfSection $choiceOfSection)
     {
         $choiceOfSection

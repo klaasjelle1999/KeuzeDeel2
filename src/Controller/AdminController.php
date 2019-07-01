@@ -16,6 +16,7 @@ use App\Manager\TierManager;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
+use Facebook\WebDriver\Exception\NoAlertOpenException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,8 +66,6 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            dd($data);
-
             $choiceOfSectionManager->createChoiceOfSection($data);
 
             return $this->redirectToRoute('admin_choice_of_section');
@@ -115,6 +114,22 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
             'periods' => $periods,
         ]);
+    }
+
+    /**
+     * @Route(path="/admin/keuzedeel/hard-delete/{choiceOfSection}", name="hard-delete_choice_of_section")
+     * @param ChoiceOfSection $choiceOfSection
+     * @param ChoiceOfSectionManager $choiceOfSectionManager
+     */
+    public function hardDeleteChoiceOfSection(ChoiceOfSection $choiceOfSection, ChoiceOfSectionManager $choiceOfSectionManager)
+    {
+        if (!$choiceOfSection instanceof ChoiceOfSection) {
+            throw new NotFoundHttpException('Dit keuzedeel is niet gevonden!');
+        }
+
+        $choiceOfSectionManager->hardDeleteChoiceOfSection($choiceOfSection);
+
+        return $this->redirectToRoute('admin_choice_of_section');
     }
 
     /**
@@ -237,6 +252,23 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('category');
     }
 
+    /**
+     * @Route(path="/admin/category/hard-delete/{category}", name="hard-delete_category")
+     * @param Category $category
+     * @param CategoryManager $categoryManager
+     * @return RedirectResponse
+     */
+    public function hardDeleteCategory(Category $category, CategoryManager $categoryManager)
+    {
+        if (!$category instanceof Category) {
+            throw new NotFoundHttpException('Deze categorie is niet gevonden!');
+        }
+
+        $categoryManager->hardDeleteCategory($category);
+
+        return $this->redirectToRoute('category');
+    }
+    
     /**
      * @Route(path="/admin/category/activate/{category}", name="activate_category")
      * @param CategoryManager $categoryManager
